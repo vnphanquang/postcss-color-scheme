@@ -1,0 +1,11 @@
+node_modules
+*.gitignore
+.env
+.env.*
+LICENSE
+*.log
+.DS_Store
+**/*generated/
+coverage/
+pnpm-lock.yaml
+*.css
