@@ -1,0 +1,25 @@
+@media (max-width: 767px) {
+  .dark {
+    color: black;
+  }
+  html[data-color-scheme="dark"] .dark {
+    color: white;
+  }
+  @media (prefers-color-scheme: dark) {
+    html:not([data-color-scheme="light"]) .dark {
+      color: white;
+    }
+  }
+
+  .light {
+    color: white;
+  }
+  html[data-color-scheme="light"] .light {
+    color: black;
+  }
+  @media (prefers-color-scheme: light) {
+    html:not([data-color-scheme="dark"]) .light {
+      color: black;
+    }
+  }
+}

@@ -1,0 +1,68 @@
+html[data-color-scheme="dark"] .single-prop {
+  color: white;
+}
+
+.multiple-prop {
+  color: black;
+}
+html[data-color-scheme="dark"] .multiple-prop {
+  color: white;
+}
+
+.global {
+  --color: black;
+  color: var(--color);
+  background-color: white;
+}
+:global(html[data-color-scheme="dark"]) .global {
+  --color: white;
+  background-color: black;
+}
+
+.light-dark {
+  color: black;
+}
+html[data-color-scheme="dark"] .light-dark {
+  color: red;
+}
+html[data-color-scheme="light"] .light-dark {
+  color: blue;
+}
+:global(html[data-color-scheme="dark"]) .light-dark {
+  background-color: blue;
+}
+:global(html[data-color-scheme="light"]) .light-dark {
+  background-color: red;
+}
+
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-color-scheme="light"]) .single-prop {
+    color: white;
+  }
+
+  html:not([data-color-scheme="light"]) .multiple-prop {
+    color: white;
+  }
+
+  :global(html:not([data-color-scheme="light"])) .global {
+    --color: white;
+    background-color: black;
+  }
+
+  html:not([data-color-scheme="light"]) .light-dark {
+    color: red;
+  }
+  :global(html:not([data-color-scheme="light"])) .light-dark {
+    background-color: blue;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  html:not([data-color-scheme="dark"]) .light-dark {
+    color: blue;
+  }
+  :global(html:not([data-color-scheme="dark"])) .light-dark {
+    background-color: red;
+  }
+}
