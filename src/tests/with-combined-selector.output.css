@@ -1,0 +1,34 @@
+html[data-color-scheme="dark"] ul, html[data-color-scheme="dark"] .another-list {
+  color: white;
+}
+
+html[data-color-scheme="dark"] :is(ul, .another-list) {
+  color: white;
+}
+
+html[data-color-scheme="light"] main:has(ul, .another-list) {
+  color: white;
+}
+
+html[data-color-scheme="light"] main:has(+ :is(ul, .another-list)) {
+  color: white;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-color-scheme="light"]) ul, html:not([data-color-scheme="light"]) .another-list {
+    color: white;
+  }
+
+  html:not([data-color-scheme="light"]) :is(ul, .another-list) {
+    color: white;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  html:not([data-color-scheme="dark"]) main:has(ul, .another-list) {
+    color: white;
+  }
+  html:not([data-color-scheme="dark"]) main:has(+ :is(ul, .another-list)) {
+    color: white;
+  }
+}
