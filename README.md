@@ -2,9 +2,21 @@
 
 [![github.actions.changeset.badge]][github.actions.changeset] [![codecov.badge]][codecov] [![MIT][license.badge]][license] [![npm.badge]][npm]
 
+## Table of Contents
+
+- [postcss-color-scheme](#postcss-color-scheme)
+  - [Table of Contents](#table-of-contents)
+  - [Changelog](#changelog)
+  - [Installation](#installation)
+  - [Design Decisions](#design-decisions)
+  - [Supported At Rules](#supported-at-rules)
+  - [Global Variant](#global-variant)
+  - [Test Cases \& Examples](#test-cases--examples)
+  - [Tailwind Support](#tailwind-support)
+
 ## [Changelog][changelog]
 
-Postcss plugin for handling `prefers-color-scheme`
+Postcss plugin for handling `prefers-color-scheme`, plus [tailwind support](#tailwind-support)
 
 Input
 
@@ -140,6 +152,31 @@ The following table lists test cases covered by this plugin, please refer to [te
 | with [postcss-nesting] | `.my-class { & .nested { @dark { color: white } } }` | [input][tests.with-postcss-nesting.input] | [output][tests.with-postcss-nesting.output] |
 | with [postcss-nested] | `.my-class { .nested { @dark { color: white } } }` | [input][tests.with-postcss-nested.input] | [output][tests.with-postcss-nested.output] |
 
+## Tailwind Support
+
+Make sure you have installed and configured `tailwindcss`.
+
+```bash
+npm install --save-dev tailwindcss
+```
+
+Add `postcss-color-scheme` to your tailwind config as a plugin, and turn off the default `darkMode` handling.
+
+```js
+/** @type {import("tailwindcss").Config } */
+module.exports = {
+  // your config ...
+  darkMode: '',
+  plugins: [require('postcss-color-scheme/tailwind')],
+};
+```
+
+Now, the following is available:
+
+```html
+<input class="text-white dark:text-black light:border-gray-500">
+```
+
 [changelog]: ./CHANGELOG.md
 [tests]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/src/color-scheme.test.js
 
@@ -169,3 +206,4 @@ The following table lists test cases covered by this plugin, please refer to [te
 
 [postcss-nesting]: https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-nesting
 [postcss-nested]: https://github.com/postcss/postcss-nested
+[tailwind]: https://tailwindcss.com/
