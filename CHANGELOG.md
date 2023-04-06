@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.1
+
+### Patch Changes
+
+- [`6dac3e4`](https://github.com/vnphanquang/postcss-color-scheme/commit/6dac3e4834a7dff546ad3a7ff62ce55197eed10f) Thanks [@vnphanquang](https://github.com/vnphanquang)! - remove lib folder from gitignnore
+
 ## 0.2.0
 
 ### Minor Changes
