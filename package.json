@@ -2,11 +2,11 @@
   "name": "postcss-color-scheme",
   "version": "0.1.0",
   "description": "postcss plugin for handling prefers-color-scheme",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "exports": {
     "./package.json": "./package.json",
-    "./tailwind": "./src/tailwind.js",
-    ".": "./src/index.js"
+    "./tailwind": "./lib/tailwind.js",
+    ".": "./lib/index.js"
   },
   "scripts": {
     "test": "vitest --ui --coverage",
@@ -16,8 +16,9 @@
     "format": "prettier --plugin-search-dir . --write ."
   },
   "files": [
-    "src/index.js",
-    "src/color-scheme.js",
+    "lib/index.js",
+    "lib/color-scheme.js",
+    "lib/tailwind.js",
     "CHANGELOG.md",
     "README.md",
     "LICENSE",

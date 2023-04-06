@@ -6,7 +6,7 @@ on:
     branches:
       - main
     paths:
-      - "src/**/*.{css,js}"
+      - "lib/**/*.{css,js}"
       - ".github/workflows/codecov.yaml"
       - vitest.config.js
 
