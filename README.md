@@ -4,16 +4,35 @@
 
 ## [Changelog][changelog]
 
-Postcss plugin ...
+Postcss plugin for handling `prefers-color-scheme`
 
 Input
 
 ```css
+.my-class {
+  color: black;
+  @dark {
+    color: white;
+  }
+}
 ```
 
 Output
 
 ```css
+.my-class {
+  color: black;
+}
+
+html[data-color-scheme="dark"] .my-class {
+  color: white;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-color-scheme="light"]) .my-class {
+    color: white;
+  }
+}
 ```
 
 ## Installation
@@ -32,11 +51,83 @@ module.exports = {
 };
 ```
 
+## Design Decisions
+
+You might have noticed a couple of opinionated code at the top of this document. These are extracted from my work, and currently serve my use cases very well. Should you have concerns, suggestions for improvements, or solution for making this more generic, feel free to open an issue. Thanks!
+
+1. Rely on `data-color-scheme` for explicit theme settings. This requires setting `data-color-scheme` on the root html element.
+
+2. Provide fallback to when user has not explicitly select a theme. Let's refer to the demo above, with rules enumerated:
+
+    ```css
+      /* (1) */
+      .my-class {
+        color: black;
+      }
+
+      /* (2) */
+      html[data-color-scheme="dark"] .my-class {
+        color: white;
+      }
+
+      /* (3) */
+      @media (prefers-color-scheme: dark) {
+        html:not([data-color-scheme="light"]) .my-class {
+          color: white;
+        }
+      }
+    ```
+
+    Imagine your system provides 3 options: `dark`, `light`, and `system` (default). There are 4 possible scenarios.
+
+    1. User has not explicitly selected a theme (theme = `system`), and the system prefers `light` (`prefers-color-scheme` = `light`):
+
+        --> (1) applies.
+
+    2. User has not explicitly selected a theme (theme = `system`), and the system prefers `dark`
+    (`prefers-color-scheme` = `dark`):
+
+        --> (1) & (3) applies, (3) takes precedence because of its higher specificity.
+
+    3. User selected `dark` (`data-color-theme` set to `dark` on root html) :
+
+        --> (1) & (2) applies, (2) takes precedence because of its higher specificity.
+
+    4. User selected `light` (`data-color-theme` set to `light` on root html) :
+
+        --> (1) applies.
+
 ## Supported At Rules
 
 | At Rule | Description |
 | --- | --- |
-<!-- | `@space-x` | Add horizontal spacing between direct children | -->
+| `@dark` | apply rules for dark color scheme |
+| `@light` | apply rules for light color scheme |
+
+## Global Variant
+
+`postcss-color-scheme` supports the `:global` syntax, often seen in css modules and similar systems.
+
+Input
+
+```css
+.my-class {
+  @dark global {
+    color: white;
+  }
+}
+```
+
+```css
+:global(html[data-color-scheme="dark"]) .my-class {
+  color: white;
+}
+@media (prefers-color-scheme: dark) {
+  :global(html:not([data-color-scheme="light"])) .my-class {
+    color: white;
+  }
+}
+```
 
 ## Test Cases & Examples
 
@@ -44,10 +135,10 @@ The following table lists test cases covered by this plugin, please refer to [te
 
 | Test Case | Description | Input | Output |
 | --- | --- | --- | --- |
-| in media queries | `` | [input][tests.in-media-queries.input] | [output][tests.in-media-queries.output] |
-| with combined selector | `` | [input][tests.with-combined-selector.input] | [output][tests.with-combined-selector.output] |
-| with [postcss-nesting] | `` | [input][tests.with-postcss-nesting.input] | [output][tests.with-postcss-nesting.output] |
-| with [postcss-nested] | `` | [input][tests.with-postcss-nested.input] | [output][tests.with-postcss-nested.output] |
+| nest in other media queries | `@media (min-width: 768px) { .my-class { @dark { color: white } } }` | [input][tests.in-media-queries.input] | [output][tests.in-media-queries.output] |
+| with combined selector | `.my-class, .others { @dark { color: white } }` | [input][tests.with-combined-selector.input] | [output][tests.with-combined-selector.output] |
+| with [postcss-nesting] | `.my-class { & .nested { @dark { color: white } } }` | [input][tests.with-postcss-nesting.input] | [output][tests.with-postcss-nesting.output] |
+| with [postcss-nested] | `.my-class { .nested { @dark { color: white } } }` | [input][tests.with-postcss-nested.input] | [output][tests.with-postcss-nested.output] |
 
 [changelog]: ./CHANGELOG.md
 [tests]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/src/color-scheme.test.js

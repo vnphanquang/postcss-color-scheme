@@ -1,7 +1,7 @@
 {
   "name": "postcss-color-scheme",
   "version": "0.0.0",
-  "description": "postcss plugin for handling different color scheme",
+  "description": "postcss plugin for handling prefers-color-scheme",
   "main": "src/index.js",
   "scripts": {
     "test": "vitest --ui --coverage",
