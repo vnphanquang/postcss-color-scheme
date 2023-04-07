@@ -167,7 +167,7 @@ Add `postcss-color-scheme` to your tailwind config as a plugin, and turn off the
 module.exports = {
   // your config ...
   darkMode: '',
-  plugins: [require('postcss-color-scheme/tailwind')],
+  plugins: [require('postcss-color-scheme/lib/tailwind')],
 };
 ```
 

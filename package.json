@@ -3,11 +3,6 @@
   "version": "0.2.1",
   "description": "postcss plugin for handling prefers-color-scheme",
   "main": "lib/index.js",
-  "exports": {
-    "./package.json": "./package.json",
-    "./tailwind": "./lib/tailwind.js",
-    ".": "./lib/index.js"
-  },
   "scripts": {
     "test": "vitest --ui --coverage",
     "ci:test": "vitest run --coverage",
