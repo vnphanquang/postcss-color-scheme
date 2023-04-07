@@ -1,6 +1,6 @@
 {
   "name": "postcss-color-scheme",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "postcss plugin for handling prefers-color-scheme",
   "main": "lib/index.js",
   "scripts": {

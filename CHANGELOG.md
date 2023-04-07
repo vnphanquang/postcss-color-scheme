@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.3.0
+
+### Minor Changes
+
+- [`e0c5423`](https://github.com/vnphanquang/postcss-color-scheme/commit/e0c54236c6c953e068a1dd84422f3625adb95b30) Thanks [@vnphanquang](https://github.com/vnphanquang)! - adjustments to adhere to [postcss plugin guidelines](https://github.com/postcss/postcss/blob/main/docs/guidelines/plugin.md)
+
+### Patch Changes
+
+- [`da6fac2`](https://github.com/vnphanquang/postcss-color-scheme/commit/da6fac2d405e3719937c943a07c691026cd3bd5b) Thanks [@vnphanquang](https://github.com/vnphanquang)! - test case for invalid parameters
+
 ## 0.2.2
 
 ### Patch Changes
