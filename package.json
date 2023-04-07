@@ -22,6 +22,7 @@
   "author": "Quang Phan",
   "license": "MIT",
   "keywords": [
+    "postcss-plugin",
     "postcss",
     "plugin",
     "theme",
@@ -43,6 +44,9 @@
     "prettier": "^2.8.7",
     "tailwindcss": "^3.3.1",
     "vitest": "^0.29.8"
+  },
+  "peerDependencies": {
+    "postcss": "^8.0.0"
   },
   "engines": {
     "pnpm": ">=8.0.0",
