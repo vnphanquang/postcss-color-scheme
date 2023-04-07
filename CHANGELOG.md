@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.2
+
+### Patch Changes
+
+- [`82396af`](https://github.com/vnphanquang/postcss-color-scheme/commit/82396af36921a504685ea4127286f807b687dafe) Thanks [@vnphanquang](https://github.com/vnphanquang)! - add missing `postcss` import, remove "exports" field in package.json
+
 ## 0.2.1
 
 ### Patch Changes
