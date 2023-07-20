@@ -97,6 +97,16 @@ You might have noticed a couple of opinionated code at the top of this document.
 
         --> (1) applies.
 
+    ```mermaid
+    flowchart TD
+        A[Has user explicitly selected theme?] -->|Yes| B[Which mode?]
+        B --> Light
+        B --> Dark
+        A -->|No| C[prefers-color-scheme?]
+        C -->Light
+        C --->Dark
+    ```
+
 ## Supported At Rules
 
 | At Rule | Description |
