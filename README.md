@@ -2,18 +2,6 @@
 
 [![github.actions.changeset.badge]][github.actions.changeset] [![codecov.badge]][codecov] [![MIT][license.badge]][license] [![npm.badge]][npm]
 
-## Table of Contents
-
-- [postcss-color-scheme](#postcss-color-scheme)
-  - [Table of Contents](#table-of-contents)
-  - [Changelog](#changelog)
-  - [Installation](#installation)
-  - [Design Decisions](#design-decisions)
-  - [Supported At Rules](#supported-at-rules)
-  - [Global Variant](#global-variant)
-  - [Test Cases \& Examples](#test-cases--examples)
-  - [Tailwind Support](#tailwind-support)
-
 ## [Changelog][changelog]
 
 Postcss plugin for handling `prefers-color-scheme`, plus [tailwind support](#tailwind-support)
@@ -143,7 +131,7 @@ Input
 
 ## Test Cases & Examples
 
-The following table lists test cases covered by this plugin, please refer to [tests][tests] for details and to test input css as examples
+The following table lists test cases covered by this plugin, please refer to [tests][tests] for details and to tests' input css as examples
 
 | Test Case | Description | Input | Output |
 | --- | --- | --- | --- |
