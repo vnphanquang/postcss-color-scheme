@@ -3,7 +3,7 @@ html {
 }
 
 html[data-color-scheme="dark"].nested, html[data-color-scheme="dark"][nested] {
-  color: yellow
+  color: yellow;
 }
 
 html[data-color-scheme="dark"] {
@@ -22,6 +22,10 @@ html[data-color-scheme="light"][lang="en"] {
   color: blue;
 }
 
+:global(html[data-color-scheme="light"]:not(.class-not).class) {
+  color: gray;
+}
+
 @media (prefers-color-scheme: dark) {
   html:not([data-color-scheme="light"]) {
     color: black;
@@ -32,7 +36,7 @@ html[data-color-scheme="light"][lang="en"] {
   }
 
   html:not([data-color-scheme="light"]).nested, html:not([data-color-scheme="light"])[nested] {
-    color: yellow
+    color: yellow;
   }
 }
 
@@ -44,4 +48,9 @@ html[data-color-scheme="light"][lang="en"] {
   html:not([data-color-scheme="dark"])[lang="en"] {
     color: blue;
   }
+
+  :global(html:not([data-color-scheme="dark"]):not(.class-not).class) {
+    color: gray;
+  }
+
 }

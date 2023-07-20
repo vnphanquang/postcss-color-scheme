@@ -16,6 +16,12 @@ html {
   }
 }
 
+html:not(.class-not).class {
+  @light global {
+    color: gray;
+  }
+}
+
 html.class {
   @dark {
     color: red;
