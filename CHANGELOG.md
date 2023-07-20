@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.1
+
+### Patch Changes
+
+- [`2b39ee9`](https://github.com/vnphanquang/postcss-color-scheme/commit/2b39ee9f65633d39155e00883b69cc96e1d5e173) Thanks [@vnphanquang](https://github.com/vnphanquang)! - added support when nested in html itself
+
 ## 0.3.0
 
 ### Minor Changes
