@@ -53,11 +53,11 @@ module.exports = {
 
 ## Design Decisions
 
-You might have noticed a couple of opinionated code at the top of this document. These are extracted from my work, and currently serve my use cases very well. Should you have concerns, suggestions for improvements, or solution for making this more generic, feel free to open an issue. Thanks!
+You might have noticed a couple of opinionated code at the top of this document. These are extracted from my daily work, and currently serve my use cases very well. Should you have concerns, suggestions for improvements, or solution for making this more generic, feel free to open an issue. Thanks!
 
 1. Rely on `data-color-scheme` for explicit theme settings. This requires setting `data-color-scheme` on the root html element.
 
-2. Provide fallback to when user has not explicitly select a theme. Let's refer to the demo above, with rules enumerated:
+2. Provide fallback when user has not explicitly select a theme. Let's refer to the demo above, with rules enumerated:
 
     ```css
       /* (1) */
@@ -78,7 +78,7 @@ You might have noticed a couple of opinionated code at the top of this document.
       }
     ```
 
-    Imagine your system provides 3 options: `dark`, `light`, and `system` (default). There are 4 possible scenarios.
+    Imagine your system provides 3 options: `dark`, `light`, and `system` (default, auto, i.e respect system preferences). There are 4 possible scenarios.
 
     1. User has not explicitly selected a theme (theme = `system`), and the system prefers `light` (`prefers-color-scheme` = `light`):
 
@@ -104,7 +104,7 @@ You might have noticed a couple of opinionated code at the top of this document.
         B --> Dark
         A -->|No| C[prefers-color-scheme?]
         C -->Light
-        C --->Dark
+        C -->Dark
     ```
 
 ## Supported At Rules
@@ -147,10 +147,11 @@ The following table lists test cases covered by this plugin, please refer to [te
 | --- | --- | --- | --- |
 | nest in other media queries | `@media (min-width: 768px) { .my-class { @dark { color: white } } }` | [input][tests.in-media-queries.input] | [output][tests.in-media-queries.output] |
 | with combined selector | `.my-class, .others { @dark { color: white } }` | [input][tests.with-combined-selector.input] | [output][tests.with-combined-selector.output] |
+| with selector at `html`| `` | [input][tests.with-selector-at-html.input] | [output][tests.with-selector-at-html.output] |
 | with [postcss-nesting] | `.my-class { & .nested { @dark { color: white } } }` | [input][tests.with-postcss-nesting.input] | [output][tests.with-postcss-nesting.output] |
 | with [postcss-nested] | `.my-class { .nested { @dark { color: white } } }` | [input][tests.with-postcss-nested.input] | [output][tests.with-postcss-nested.output] |
 
-## Tailwind Support
+## [Tailwind] Support
 
 Make sure you have installed and configured `tailwindcss`.
 
@@ -158,7 +159,7 @@ Make sure you have installed and configured `tailwindcss`.
 npm install --save-dev tailwindcss
 ```
 
-Add `postcss-color-scheme` to your tailwind config as a plugin, and turn off the default `darkMode` handling.
+Add `postcss-color-scheme` to your [tailwind] config as a plugin, and turn off the default `darkMode` handling.
 
 ```js
 /** @type {import("tailwindcss").Config } */
@@ -176,19 +177,22 @@ Now, the following is available:
 ```
 
 [changelog]: ./CHANGELOG.md
-[tests]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/src/color-scheme.test.js
+[tests]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/lib/color-scheme.test.js
 
-[tests.in-media-queries.input]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/src/tests/in-media-queries.input.css
-[tests.in-media-queries.output]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/src/tests/in-media-queries.output.css
+[tests.in-media-queries.input]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/lib/tests/in-media-queries.input.css
+[tests.in-media-queries.output]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/lib/tests/in-media-queries.output.css
 
-[tests.with-combined-selector.input]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/src/tests/with-combined-selector.input.css
-[tests.with-combined-selector.output]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/src/tests/with-combined-selector.output.css
+[tests.with-combined-selector.input]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/lib/tests/with-combined-selector.input.css
+[tests.with-combined-selector.output]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/lib/tests/with-combined-selector.output.css
 
-[tests.with-postcss-nesting.input]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/src/tests/with-postcss-nesting.input.css
-[tests.with-postcss-nesting.output]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/src/tests/with-postcss-nest.output.css
+[tests.with-postcss-nesting.input]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/lib/tests/with-postcss-nesting.input.css
+[tests.with-postcss-nesting.output]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/lib/tests/with-postcss-nest.output.css
 
-[tests.with-postcss-nested.input]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/src/tests/with-postcss-nested.input.css
-[tests.with-postcss-nested.output]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/src/tests/with-postcss-nest.output.css
+[tests.with-postcss-nested.input]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/lib/tests/with-postcss-nested.input.css
+[tests.with-postcss-nested.output]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/lib/tests/with-postcss-nest.output.css
+
+[tests.with-selector-at-html.input]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/lib/tests/selector-is-html.input.css
+[tests.with-selector-at-html.output]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/lib/tests/selector-is-html.output.css
 
 <!-- npm -->
 [npm.badge]: https://img.shields.io/npm/v/postcss-color-scheme
