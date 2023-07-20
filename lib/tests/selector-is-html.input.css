@@ -1,0 +1,29 @@
+html {
+  color: blue;
+
+  @light {
+    color: white;
+  }
+
+  @dark {
+    color: black;
+  }
+
+  &.nested, &[nested] {
+    @dark {
+      color: yellow;
+    }
+  }
+}
+
+html.class {
+  @dark {
+    color: red;
+  }
+}
+
+html[lang="en"] {
+  @light {
+    color: blue;
+  }
+}
