@@ -161,12 +161,12 @@ npm install --save-dev tailwindcss
 
 Add `postcss-color-scheme` to your [tailwind] config as a plugin, and turn off the default `darkMode` handling.
 
-```js
+```diff
 /** @type {import("tailwindcss").Config } */
 module.exports = {
   // your config ...
-  darkMode: '',
-  plugins: [require('postcss-color-scheme/lib/tailwind')],
++ darkMode: '',
++ plugins: [require('postcss-color-scheme/lib/tailwind')],
 };
 ```
 
@@ -175,6 +175,11 @@ Now, the following is available:
 ```html
 <input class="text-white dark:text-black light:border-gray-500">
 ```
+
+Note that this `tailwind` plugin can be used in conjunction with the `postcss` plugin. They are complementary and not exclusive.
+
+- `postcss` plugin provides `@dark` and `@light` css at-rule syntax,
+- `tailwind` plugin provides `dark:` and `light:` classes in html.
 
 [changelog]: ./CHANGELOG.md
 [tests]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/lib/color-scheme.test.js
