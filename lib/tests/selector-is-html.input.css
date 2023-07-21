@@ -43,3 +43,9 @@ html[lang="en"] {
     color: blue;
   }
 }
+
+:root {
+  @dark {
+    color: violet;
+  }
+}

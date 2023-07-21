@@ -34,6 +34,10 @@ html[data-color-scheme="light"][lang="en"] {
   color: gray;
 }
 
+:root[data-color-scheme="dark"] {
+  color: violet;
+}
+
 @media (prefers-color-scheme: dark) {
   html:not([data-color-scheme="light"]) {
     color: black;
@@ -49,6 +53,10 @@ html[data-color-scheme="light"][lang="en"] {
 
   :global(html:not([data-color-scheme="light"])) {
     color: brown;
+  }
+
+  :root:not([data-color-scheme="light"]) {
+    color: violet;
   }
 }
 
