@@ -1,0 +1,12 @@
+@media (max-width: 767px) {
+  html[data-color-scheme="dark"] .grandparent .parent .child {
+    color: red;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    html:not([data-color-scheme="light"]) .grandparent .parent .child {
+      color: red;
+    }
+  }
+}
+
