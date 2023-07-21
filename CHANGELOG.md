@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.3.2
+
+### Patch Changes
+
+- [`65916b0`](https://github.com/vnphanquang/postcss-color-scheme/commit/65916b0c7bf563b2ed97f8468592aec5343a1873) Thanks [@vnphanquang](https://github.com/vnphanquang)! - added test case where used in deeply nested selectors
+
+- [`7acd332`](https://github.com/vnphanquang/postcss-color-scheme/commit/7acd332da371d1699846411e3684ea78fd7e005e) Thanks [@vnphanquang](https://github.com/vnphanquang)! - fix broken links in README, add missing reference to test case
+
+- [`5b946c3`](https://github.com/vnphanquang/postcss-color-scheme/commit/5b946c317f06b380b925453d18b6bdb3b3ae9789) Thanks [@vnphanquang](https://github.com/vnphanquang)! - add test case for where there are child rules in `@dark` and `@light`
+
+- [`d3d86b6`](https://github.com/vnphanquang/postcss-color-scheme/commit/d3d86b61b2bf2e99069cfd58fae0ff3e0d3955a3) Thanks [@vnphanquang](https://github.com/vnphanquang)! - add to docs clarification that tailwind & postcss plugins can be used together, not one or the other
+
+- [`f4f9c80`](https://github.com/vnphanquang/postcss-color-scheme/commit/f4f9c80607aaadd6af9bd9bd37052a0c234874d9) Thanks [@vnphanquang](https://github.com/vnphanquang)! - add support for `:root` selector; i.e `:root { @dark { /* ... */ } }`
+
 ## 0.3.1
 
 ### Patch Changes
