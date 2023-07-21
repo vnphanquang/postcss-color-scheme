@@ -145,11 +145,12 @@ The following table lists test cases covered by this plugin, please refer to [te
 
 | Test Case | Description | Input | Output |
 | --- | --- | --- | --- |
-| nest in other media queries | `@media (min-width: 768px) { .my-class { @dark { color: white } } }` | [input][tests.in-media-queries.input] | [output][tests.in-media-queries.output] |
-| with combined selector | `.my-class, .others { @dark { color: white } }` | [input][tests.with-combined-selector.input] | [output][tests.with-combined-selector.output] |
-| with selector at `html`| `` | [input][tests.with-selector-at-html.input] | [output][tests.with-selector-at-html.output] |
-| with [postcss-nesting] | `.my-class { & .nested { @dark { color: white } } }` | [input][tests.with-postcss-nesting.input] | [output][tests.with-postcss-nesting.output] |
-| with [postcss-nested] | `.my-class { .nested { @dark { color: white } } }` | [input][tests.with-postcss-nested.input] | [output][tests.with-postcss-nested.output] |
+| in media queries | `@media (min-width: 768px) { .my-class { @dark { color: blue } } }` | [input][tests.in-media-queries.input] | [output][tests.in-media-queries.output] |
+| with combined selector | `.my-class, .others { @dark { color: blue } }` | [input][tests.with-combined-selector.input] | [output][tests.with-combined-selector.output] |
+| inside `:global` | `:global(.my-class) { @dark global { color: blue } }` | [input][tests.inside-global.input] | [output][tests.inside-global.output] |
+| with selector at `html`| `html { @dark { color: blue } }` | [input][tests.with-selector-at-html.input] | [output][tests.with-selector-at-html.output] |
+| with [postcss-nesting] | `.my-class { & .nested { @dark { color: blue } } }` | [input][tests.with-postcss-nesting.input] | [output][tests.with-postcss-nesting.output] |
+| with [postcss-nested] | `.my-class { .nested { @dark { color: blue } } }` | [input][tests.with-postcss-nested.input] | [output][tests.with-postcss-nested.output] |
 
 ## [Tailwind] Support
 
@@ -198,6 +199,9 @@ Note that this `tailwind` plugin can be used in conjunction with the `postcss` p
 
 [tests.with-selector-at-html.input]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/lib/tests/selector-is-html.input.css
 [tests.with-selector-at-html.output]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/lib/tests/selector-is-html.output.css
+
+[tests.inside-global.input]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/lib/tests/inside-global.input.css
+[tests.inside-global.output]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/lib/tests/inside-global.output.css
 
 <!-- npm -->
 [npm.badge]: https://img.shields.io/npm/v/postcss-color-scheme

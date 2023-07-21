@@ -1,0 +1,13 @@
+:global(.class-1) {
+  color: blue;
+  @dark {
+    color: red;
+  }
+}
+
+:global(.class-2) {
+  color: blue;
+  @light global {
+    color: red;
+  }
+}

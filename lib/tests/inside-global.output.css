@@ -1,0 +1,24 @@
+:global(.class-1) {
+  color: blue;
+}
+html[data-color-scheme="dark"] :global(.class-1) {
+  color: red;
+}
+@media (prefers-color-scheme: dark) {
+  html:not([data-color-scheme="light"]) :global(.class-1) {
+    color: red;
+  }
+}
+
+:global(.class-2) {
+  color: blue;
+}
+
+:global(html[data-color-scheme="light"]) :global(.class-2) {
+  color: red;
+}
+@media (prefers-color-scheme: light) {
+  :global(html:not([data-color-scheme="dark"])) :global(.class-2) {
+    color: red;
+  }
+}
