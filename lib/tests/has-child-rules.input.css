@@ -1,0 +1,11 @@
+.parent {
+  @dark {
+    & .child {
+      color: red;
+    }
+
+    @media (max-width: 767px) {
+      color: blue;
+    }
+  }
+}

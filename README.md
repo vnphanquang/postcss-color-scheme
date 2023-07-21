@@ -147,10 +147,11 @@ The following table lists test cases covered by this plugin, please refer to [te
 | --- | --- | --- | --- |
 | in media queries | `@media (min-width: 768px) { .my-class { @dark { color: blue } } }` | [input][tests.in-media-queries.input] | [output][tests.in-media-queries.output] |
 | with combined selector | `.my-class, .others { @dark { color: blue } }` | [input][tests.with-combined-selector.input] | [output][tests.with-combined-selector.output] |
-| inside `:global` | `:global(.my-class) { @dark global { color: blue } }` | [input][tests.inside-global.input] | [output][tests.inside-global.output] |
-| with selector at `html`| `html { @dark { color: blue } }` | [input][tests.with-selector-at-html.input] | [output][tests.with-selector-at-html.output] |
 | with [postcss-nesting] | `.my-class { & .nested { @dark { color: blue } } }` | [input][tests.with-postcss-nesting.input] | [output][tests.with-postcss-nesting.output] |
 | with [postcss-nested] | `.my-class { .nested { @dark { color: blue } } }` | [input][tests.with-postcss-nested.input] | [output][tests.with-postcss-nested.output] |
+| inside `:global` | `:global(.my-class) { @dark global { color: blue } }` | [input][tests.inside-global.input] | [output][tests.inside-global.output] |
+| with selector at `html`| `html { @dark { color: blue } }` | [input][tests.with-selector-at-html.input] | [output][tests.with-selector-at-html.output] |
+| has child rules| `...` | [input][tests.has-child-rules.input] | [output][tests.has-child-rules.output] |
 
 ## [Tailwind] Support
 
@@ -202,6 +203,9 @@ Note that this `tailwind` plugin can be used in conjunction with the `postcss` p
 
 [tests.inside-global.input]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/lib/tests/inside-global.input.css
 [tests.inside-global.output]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/lib/tests/inside-global.output.css
+
+[tests.has-child-rules.input]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/lib/tests/has-child-rules.input.css
+[tests.has-child-rules.output]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/lib/tests/has-child-rules.output.css
 
 <!-- npm -->
 [npm.badge]: https://img.shields.io/npm/v/postcss-color-scheme
