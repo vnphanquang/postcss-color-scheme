@@ -22,6 +22,14 @@ html[data-color-scheme="light"][lang="en"] {
   color: blue;
 }
 
+:global(html[data-color-scheme="light"]) {
+  color: purple;
+}
+
+:global(html[data-color-scheme="dark"]) {
+  color: brown;
+}
+
 :global(html[data-color-scheme="light"]:not(.class-not).class) {
   color: gray;
 }
@@ -38,6 +46,10 @@ html[data-color-scheme="light"][lang="en"] {
   html:not([data-color-scheme="light"]).nested, html:not([data-color-scheme="light"])[nested] {
     color: yellow;
   }
+
+  :global(html:not([data-color-scheme="light"])) {
+    color: brown;
+  }
 }
 
 @media (prefers-color-scheme: light) {
@@ -53,4 +65,7 @@ html[data-color-scheme="light"][lang="en"] {
     color: gray;
   }
 
+  :global(html:not([data-color-scheme="dark"])) {
+    color: purple;
+  }
 }
