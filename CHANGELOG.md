@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.0
+
+### Major Changes
+
+- [`47ca0d3`](https://github.com/vnphanquang/postcss-color-scheme/commit/47ca0d3e1abc4f24d7a5ab6723c1e19e20c4d005) Thanks [@vnphanquang](https://github.com/vnphanquang)! - [BREAKING] more predictable public exports with typescript support
+
 ## 0.3.2
 
 ### Patch Changes
