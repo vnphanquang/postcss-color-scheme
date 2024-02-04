@@ -1,6 +1,6 @@
 {
   "name": "postcss-color-scheme",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "postcss plugin for handling prefers-color-scheme",
   "type": "module",
   "main": "lib/postcss.js",
@@ -38,8 +38,8 @@
     "lint": "eslint --ignore-path .gitignore \"./**/*/*{ts,js,cjs}\"",
     "test": "vitest --ui --coverage",
     "ci:test": "vitest run --coverage",
-		"ci:version": "changeset version && pnpm install --no-frozen-lockfile",
-		"ci:publish": "changeset publish && pnpm install",
+    "ci:version": "changeset version && pnpm install --no-frozen-lockfile",
+    "ci:publish": "changeset publish && pnpm install",
     "format": "prettier --plugin-search-dir . --write ."
   },
   "files": [
