@@ -43,6 +43,7 @@
     "lib/index.js",
     "lib/color-scheme.js",
     "lib/tailwind.js",
+    "types",
     "CHANGELOG.md",
     "README.md",
     "LICENSE",
