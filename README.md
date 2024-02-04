@@ -166,9 +166,9 @@ Add `postcss-color-scheme` to your [tailwind] config as a plugin, and turn off t
 ```diff
 /** @type {import("tailwindcss").Config } */
 module.exports = {
-  // your config ...
+  // negate default Tailwind darkMode declaration
 + darkMode: '',
-+ plugins: [require('postcss-color-scheme/lib/tailwind')],
++ plugins: [require('postcss-color-scheme/tailwind')],
 };
 ```
 
