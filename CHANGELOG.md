@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.1
+
+### Patch Changes
+
+- [`c43b80b`](https://github.com/vnphanquang/postcss-color-scheme/commit/c43b80be966b531642e13413512bf1ffd7722a59) Thanks [@vnphanquang](https://github.com/vnphanquang)! - export default postcss plugin
+
+- [`513e561`](https://github.com/vnphanquang/postcss-color-scheme/commit/513e561bd1122dd2b184e3b2428e176e675aa559) Thanks [@vnphanquang](https://github.com/vnphanquang)! - include generated types in published package
+
+- [`912c72c`](https://github.com/vnphanquang/postcss-color-scheme/commit/912c72cbfb1db39ec878066502ddc28c2e00cbb3) Thanks [@vnphanquang](https://github.com/vnphanquang)! - add "require" and "svelte" fields to exports in package.json
+
 ## 1.0.0
 
 ### Major Changes
