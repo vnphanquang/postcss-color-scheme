@@ -8,14 +8,17 @@
   "exports": {
     ".": {
       "import": "./lib/postcss.js",
+      "require": "./lib/postcss.js",
       "types": "./types/postcss.d.ts"
     },
     "./postcss": {
       "import": "./lib/postcss.js",
+      "require": "./lib/postcss.js",
       "types": "./types/postcss.d.ts"
     },
     "./tailwind": {
       "import": "./lib/tailwind.js",
+      "require": "./lib/tailwind.js",
       "types": "./types/tailwind.d.ts"
     }
   },
