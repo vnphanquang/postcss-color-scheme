@@ -13,6 +13,6 @@
 		"noUnusedLocals": true,
 		"noUnusedParameters": true
 	},
-	"include": ["lib/**/*", "tests/**/*"],
+	"include": ["tests/**/*"],
 	"exclude": ["node_modules"]
 }
