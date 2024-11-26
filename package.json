@@ -1,7 +1,6 @@
 {
 	"name": "workspace-root",
 	"scripts": {
-		"prepare": "lefthook install",
 		"format": "prettier --write .",
 		"lint": "eslint package/lib/**/*",
 		"test": "vitest --coverage",
