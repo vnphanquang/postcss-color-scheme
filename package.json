@@ -3,7 +3,7 @@
 	"scripts": {
 		"prepare": "lefthook install",
 		"format": "prettier --write .",
-		"lint": "eslint lib/**/*",
+		"lint": "eslint package/lib/**/*",
 		"test": "vitest --coverage",
 		"ci:test:units": "vitest run tests/units --coverage --reporter=junit --outputFile=./coverage/junit.xml",
 		"ci:test:integrations": "vitest run tests/vite tests/tailwind",
