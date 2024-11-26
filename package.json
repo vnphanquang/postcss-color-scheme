@@ -1,99 +1,38 @@
 {
-  "name": "postcss-color-scheme",
-  "version": "1.0.1",
-  "description": "postcss plugin for handling prefers-color-scheme",
-  "type": "module",
-  "main": "lib/postcss.js",
-  "types": "types/postcss.d.ts",
-  "exports": {
-    ".": {
-      "types": "./types/postcss.d.ts",
-      "import": "./lib/postcss.js",
-      "default": "./lib/postcss.js"
-    },
-    "./postcss": {
-      "types": "./types/postcss.d.ts",
-      "import": "./lib/postcss.js",
-      "default": "./lib/postcss.js"
-    },
-    "./tailwind": {
-      "types": "./types/tailwind.d.ts",
-      "import": "./lib/tailwind.js",
-      "default": "./lib/tailwind.js"
-    }
-  },
-  "typesVersions": {
-    "*": {
-      "postcss": [
-        "./types/postcss.d.ts"
-      ],
-      "tailwind": [
-        "./types/tailwind.d.ts"
-      ]
-    }
-  },
-  "scripts": {
-    "package": "tsc && publint",
-    "prepublishOnly": "npm run package",
-    "lint": "eslint --ignore-path .gitignore \"./**/*/*{ts,js,cjs}\"",
-    "test": "vitest --ui --coverage",
-    "ci:test": "vitest run --coverage",
-    "ci:version": "changeset version && pnpm install --no-frozen-lockfile",
-    "ci:publish": "changeset publish && pnpm install",
-    "format": "prettier --plugin-search-dir . --write ."
-  },
-  "files": [
-    "lib/index.js",
-    "lib/color-scheme.js",
-    "lib/tailwind.js",
-    "types",
-    "CHANGELOG.md",
-    "README.md",
-    "LICENSE",
-    "package.json"
-  ],
-  "author": "Quang Phan",
-  "license": "MIT",
-  "keywords": [
-    "postcss-plugin",
-    "postcss",
-    "plugin",
-    "theme",
-    "dark",
-    "color",
-    "scheme",
-    "mode"
-  ],
-  "devDependencies": {
-    "@changesets/changelog-github": "^0.5.0",
-    "@changesets/cli": "^2.27.1",
-    "@types/node": "^20.11.16",
-    "@types/postcss-js": "^4.0.4",
-    "@vitest/coverage-istanbul": "^1.2.2",
-    "@vitest/ui": "^1.2.2",
-    "@vnphanquang/eslint-config": "^2.0.0",
-    "@vnphanquang/prettierrc": "^1.0.1",
-    "postcss": "^8.4.33",
-    "postcss-js": "^4.0.1",
-    "postcss-nested": "^6.0.1",
-    "postcss-nesting": "^12.0.2",
-    "prettier": "^3.2.5",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5.3.3",
-    "vitest": "^1.2.2"
-  },
-  "peerDependencies": {
-    "postcss": "^8.0.0"
-  },
-  "engines": {
-    "pnpm": ">=8.6.0",
-    "node": ">=20.0.0"
-  },
-  "packageManager": "pnpm@8.6.7",
-  "volta": {
-    "node": "20.10.0"
-  },
-  "dependencies": {
-    "publint": "^0.2.7"
-  }
+	"name": "workspace-root",
+	"scripts": {
+		"prepare": "lefthook install",
+		"format": "prettier --write .",
+		"lint": "eslint lib/**/*",
+		"test": "vitest --coverage",
+		"ci:test:units": "vitest run tests/units --coverage --reporter=junit --outputFile=./coverage/junit.xml",
+		"ci:test:integrations": "vitest run tests/vite tests/tailwind",
+		"ci:version": "changeset version && pnpm install --no-frozen-lockfile",
+		"ci:publish": "changeset publish && pnpm install"
+	},
+	"devDependencies": {
+		"@changesets/changelog-github": "^0.5.0",
+		"@changesets/cli": "^2.27.10",
+		"@types/node": "^22.10.0",
+		"@vitest/coverage-istanbul": "^2.1.6",
+		"@vitest/ui": "^2.1.6",
+		"@vnphanquang/eslint-config": "^3.0.1",
+		"dedent": "^1.5.3",
+		"dts-buddy": "^0.5.3",
+		"eslint": "^9.15.0",
+		"postcss": "^8.4.49",
+		"prettier": "^3.4.1",
+		"prettier-plugin-embed": "^0.4.15",
+		"publint": "^0.2.12",
+		"typescript": "^5.7.2",
+		"vitest": "^2.1.6"
+	},
+	"packageManager": "pnpm@9.12.0",
+	"engines": {
+		"pnpm": ">=9.0.0",
+		"node": ">=22.0.0"
+	},
+	"volta": {
+		"node": "22.11.0"
+	}
 }

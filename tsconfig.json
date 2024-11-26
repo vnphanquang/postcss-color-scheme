@@ -1,21 +1,18 @@
 {
-  "$schema": "https://json.schemastore.org/tsconfig",
-  "compilerOptions": {
-    "allowJs": true,
-    "checkJs": true,
-    "strict": true,
-    "target": "ESNext",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "allowSyntheticDefaultImports": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "emitDeclarationOnly": true,
-    "declaration": true,
-    "declarationMap": true,
-    "declarationDir": "types",
-    "baseUrl": "."
-  },
-  "include": ["lib/**/*.js"],
-  "exclude": ["node_modules", "**/*.test.js"]
+	"$schema": "https://json.schemastore.org/tsconfig",
+	"compilerOptions": {
+		"allowJs": true,
+		"checkJs": true,
+		"noEmit": true,
+		"strict": true,
+		"target": "esnext",
+		"module": "esnext",
+		"verbatimModuleSyntax": true,
+		"moduleResolution": "bundler",
+		"allowSyntheticDefaultImports": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true
+	},
+	"include": ["lib/**/*", "tests/**/*"],
+	"exclude": ["node_modules"]
 }

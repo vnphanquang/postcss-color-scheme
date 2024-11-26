@@ -1,11 +1,7 @@
-node_modules
-*.gitignore
-.env
-.env.*
-LICENSE
 *.log
 .DS_Store
-**/*generated/
-coverage/
+coverage
+CHANGELOG.md
+node_modules
 pnpm-lock.yaml
-*.css
+

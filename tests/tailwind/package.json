@@ -1,0 +1,10 @@
+{
+	"name": "integration-test-tailwind-v4",
+	"private": true,
+	"type": "module",
+	"devDependencies": {
+		"@tailwindcss/node": "4.0.0-beta.2",
+		"postcss-color-scheme": "workspace:*",
+		"tailwindcss": "4.0.0-beta.2"
+	}
+}

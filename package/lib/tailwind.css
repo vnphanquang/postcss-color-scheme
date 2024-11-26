@@ -1,0 +1,11 @@
+@variant light {
+	@color-scheme dark {
+		@slot;
+	}
+}
+
+@variant dark {
+	@color-scheme dark {
+		@slot;
+	}
+}

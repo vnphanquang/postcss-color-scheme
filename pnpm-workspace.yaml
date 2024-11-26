@@ -1,0 +1,4 @@
+packages:
+  - 'tests/tailwind'
+  - 'tests/vite'
+  - 'package'

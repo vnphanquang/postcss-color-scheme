@@ -1,0 +1,9 @@
+{
+	"name": "integration-test-vite",
+	"private": true,
+	"type": "module",
+	"devDependencies": {
+		"postcss-color-scheme": "workspace:*",
+		"vite": "^6.0.0"
+	}
+}

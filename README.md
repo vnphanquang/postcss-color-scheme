@@ -1,19 +1,18 @@
 # postcss-color-scheme
 
-[![github.actions.changeset.badge]][github.actions.changeset] [![codecov.badge]][codecov] [![MIT][license.badge]][license] [![npm.badge]][npm]
+[![github.actions.changesets.badge]][github.actions.changesets] [![codecov.badge]][codecov] [![MIT][license.badge]][license] [![npm.badge]][npm]
 
-## [Changelog][changelog]
-
-Postcss plugin for handling `prefers-color-scheme`, plus [tailwind support](#tailwind-support)
+Postcss plugin for handling `prefers-color-scheme`, plus [Tailwind V4 variants](#tailwind-support) (optional).
 
 Input
 
 ```css
 .my-class {
-  color: black;
-  @dark {
-    color: white;
-  }
+	color: black;
+
+	@color-scheme dark {
+		color: white;
+	}
 }
 ```
 
@@ -21,33 +20,41 @@ Output
 
 ```css
 .my-class {
-  color: black;
-}
+	color: black;
 
-html[data-color-scheme="dark"] .my-class {
-  color: white;
-}
+	html[data-color-scheme='dark'] & {
+		color: white;
+	}
 
-@media (prefers-color-scheme: dark) {
-  html:not([data-color-scheme="light"]) .my-class {
-    color: white;
-  }
+	@media (prefers-color-scheme: dark) {
+		html:not([data-color-scheme='light']) & {
+			color: white;
+		}
+	}
 }
 ```
+
+> [!NOTE]
+> Notice `postcss-color-scheme` preserves [CSS nesting](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_nesting/Using_CSS_nesting) as it has landed in all major browsers as of this writing. If you need to target older browsers, consider adding additional transform with [postcss-nesting] (not [postcss-nested]).
+
+## [Changelog][changelog]
 
 ## Installation
 
 ```bash
 npm install --save-dev postcss postcss-color-scheme
+yarn add -D postcss postcss-color-scheme
+pnpm add -D postcss postcss-color-scheme
 ```
 
 Add to your postcss config
 
-```diff
-module.exports = {
-  plugins: [
-+   require('postcss-color-scheme'),
-  ],
+```javascript
+/* @file: postcss.config.js */
+import postcssColorScheme from 'postcss-color-scheme';
+
+export default {
+	plugins: [postcssColorScheme()],
 };
 ```
 
@@ -55,45 +62,45 @@ module.exports = {
 
 You might have noticed a couple of opinionated code at the top of this document. These are extracted from my daily work, and currently serve my use cases very well. Should you have concerns, suggestions for improvements, or solution for making this more generic, feel free to open an issue. Thanks!
 
-1. Rely on `data-color-scheme` for explicit theme settings. This requires setting `data-color-scheme` on the root html element.
+1.  Rely on `data-color-scheme` for explicit theme settings. This requires setting `data-color-scheme` on the `html` element.
 
-2. Provide fallback when user has not explicitly select a theme. Let's refer to the demo above, with rules enumerated:
+2.  Provide fallback when user has not explicitly select a theme. Let's refer to the demo above, with rules enumerated:
 
     ```css
-      /* (1) */
-      .my-class {
-        color: black;
-      }
+    /* (1) */
+    .my-class {
+    	color: black;
+    }
 
-      /* (2) */
-      html[data-color-scheme="dark"] .my-class {
-        color: white;
-      }
+    /* (2) */
+    html[data-color-scheme='dark'] .my-class {
+    	color: white;
+    }
 
-      /* (3) */
-      @media (prefers-color-scheme: dark) {
-        html:not([data-color-scheme="light"]) .my-class {
-          color: white;
-        }
-      }
+    /* (3) */
+    @media (prefers-color-scheme: dark) {
+    	html:not([data-color-scheme='light']) .my-class {
+    		color: white;
+    	}
+    }
     ```
 
     Imagine your system provides 3 options: `dark`, `light`, and `system` (default, auto, i.e respect system preferences). There are 4 possible scenarios.
 
-    1. User has not explicitly selected a theme (theme = `system`), and the system prefers `light` (`prefers-color-scheme` = `light`):
+    1.  User has not explicitly selected a theme (theme = `system`), and the system prefers `light` (`prefers-color-scheme` = `light`):
 
         --> (1) applies.
 
-    2. User has not explicitly selected a theme (theme = `system`), and the system prefers `dark`
-    (`prefers-color-scheme` = `dark`):
+    2.  User has not explicitly selected a theme (theme = `system`), and the system prefers `dark`
+        (`prefers-color-scheme` = `dark`):
 
-        --> (1) & (3) applies, (3) takes precedence because of its higher specificity.
+            --> (1) & (3) applies, (3) takes precedence because of its higher specificity.
 
-    3. User selected `dark` (`data-color-theme` set to `dark` on root html) :
+    3.  User selected `dark` (`data-color-theme` set to `dark` on `html`) :
 
         --> (1) & (2) applies, (2) takes precedence because of its higher specificity.
 
-    4. User selected `light` (`data-color-theme` set to `light` on root html) :
+    4.  User selected `light` (`data-color-theme` set to `light` on `html`) :
 
         --> (1) applies.
 
@@ -106,119 +113,114 @@ You might have noticed a couple of opinionated code at the top of this document.
         C -->Light
         C -->Dark
     ```
+## What about the [light-dark()](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/light-dark) Function?
 
-## Supported At Rules
-
-| At Rule | Description |
-| --- | --- |
-| `@dark` | apply rules for dark color scheme |
-| `@light` | apply rules for light color scheme |
-
-## Global Variant
-
-`postcss-color-scheme` supports the `:global` syntax, often seen in css modules and similar systems.
-
-Input
+As of this writing, the `light-dark()` CSS function already has pretty good support across browsers,
+and is a valid solution to handle light-dark mode. However, colors declared with
+`light-dark` are not as flexible. Consider the following setup:
 
 ```css
-.my-class {
-  @dark global {
-    color: white;
-  }
+:root {
+	--regular-color: green;
+	--light-dark-color: light-dark(red, blue);
 }
 ```
 
+We can use utilize the relatively new [relative color syntax]() with `--regular-color`...
+
 ```css
-:global(html[data-color-scheme="dark"]) .my-class {
-  color: white;
-}
-@media (prefers-color-scheme: dark) {
-  :global(html:not([data-color-scheme="light"])) .my-class {
-    color: white;
-  }
+.regular {
+	/* turn from green to redish while keeping perceived lightness and chroma */
+	color: oklch(from var(--regular-color) l c calc(h - 120));
 }
 ```
 
-## Test Cases & Examples
+...while it is not possible today with `light-dark`:
 
-The following table lists test cases covered by this plugin, please refer to [tests][tests] for details and to tests' input css as examples
+```css
+.light-dark {
+	 /* invalid and ignored by browser */
+	color: oklch(from var(--light-dark-color) l c calc(h - 120));
+}
+```
 
-| Test Case | Description | Input | Output |
-| --- | --- | --- | --- |
-| in media queries | `@media (min-width: 768px) { .my-class { @dark { color: blue } } }` | [input][tests.in-media-queries.input] | [output][tests.in-media-queries.output] |
-| with combined selector | `.my-class, .others { @dark { color: blue } }` | [input][tests.with-combined-selector.input] | [output][tests.with-combined-selector.output] |
-| with [postcss-nesting] | `.my-class { & .nested { @dark { color: blue } } }` | [input][tests.with-postcss-nesting.input] | [output][tests.with-postcss-nesting.output] |
-| with [postcss-nested] | `.my-class { .nested { @dark { color: blue } } }` | [input][tests.with-postcss-nested.input] | [output][tests.with-postcss-nested.output] |
-| inside `:global` | `:global(.my-class) { @dark global { color: blue } }` | [input][tests.inside-global.input] | [output][tests.inside-global.output] |
-| with selector at `html`| `html { @dark { color: blue } }` | [input][tests.with-selector-at-html.input] | [output][tests.with-selector-at-html.output] |
-| has child rules| `...` | [input][tests.has-child-rules.input] | [output][tests.has-child-rules.output] |
+Although [color-mix](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-mix) does seem to
+work. Overall, until browser has better support for `light-dark`, `postcss-color-scheme` provides
+a more universal solution.
+
+## The `color-scheme` At-Rule
+
+This plugin essentially provides a new at-rule, `@color-scheme`; it requires a parameter with value
+of either `dark` or `light`.
+
+```css
+:root {
+	@color-scheme light {
+		color: black;
+	}
+
+	@color-scheme dark {
+		color: white;
+	}
+}
+```
+
+## Usage in Svelte Style Tag
+
+Styling in Svelte is component-scoped by default. From Svelte 5, you can wrap the `@color-scheme` at-rule in a `:global` block. For example:
+
+```svelte
+<main></main>
+
+<style lang="postcss">
+	:global {
+		main {
+			@color-scheme dark {
+				color: white;
+			}
+		}
+	}
+</style>
+```
 
 ## [Tailwind] Support
 
-Make sure you have installed and configured `tailwindcss`.
+From Tailwind V4, simply add the following to your CSS:
 
-```bash
-npm install --save-dev tailwindcss
+```css
+/* app.css, or any Tailwind-aware context */
+@import 'tailwindcss';
+@import 'postcss-color-scheme/tailwind.css';
 ```
 
-Add `postcss-color-scheme` to your [tailwind] config as a plugin, and turn off the default `darkMode` handling.
-
-```diff
-/** @type {import("tailwindcss").Config } */
-module.exports = {
-  // negate default Tailwind darkMode declaration
-+ darkMode: '',
-+ plugins: [require('postcss-color-scheme/tailwind')],
-};
-```
-
-Now, the following is available:
+This exposes the `light:` and `dark:` variants for usage in markup. For example:
 
 ```html
-<input class="text-white dark:text-black light:border-gray-500">
+<input class="text-white dark:text-black light:border-gray-500" />
 ```
 
-Note that this `tailwind` plugin can be used in conjunction with the `postcss` plugin. They are complementary and not exclusive.
+Note that these variants and the `@color-scheme` at-rule are complementary and not exclusive. Feel
+free to use both: the former is for markup, while the latter is for CSS.
 
-- `postcss` plugin provides `@dark` and `@light` css at-rule syntax,
-- `tailwind` plugin provides `dark:` and `light:` classes in html.
+> [!NOTE]
+> For Tailwind V3 and below, please use [postcss-color-scheme v1][v1].
 
 [changelog]: ./CHANGELOG.md
-[tests]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/lib/color-scheme.test.js
-
-[tests.in-media-queries.input]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/lib/tests/in-media-queries.input.css
-[tests.in-media-queries.output]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/lib/tests/in-media-queries.output.css
-
-[tests.with-combined-selector.input]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/lib/tests/with-combined-selector.input.css
-[tests.with-combined-selector.output]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/lib/tests/with-combined-selector.output.css
-
-[tests.with-postcss-nesting.input]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/lib/tests/with-postcss-nesting.input.css
-[tests.with-postcss-nesting.output]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/lib/tests/with-postcss-nest.output.css
-
-[tests.with-postcss-nested.input]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/lib/tests/with-postcss-nested.input.css
-[tests.with-postcss-nested.output]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/lib/tests/with-postcss-nest.output.css
-
-[tests.with-selector-at-html.input]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/lib/tests/selector-is-html.input.css
-[tests.with-selector-at-html.output]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/lib/tests/selector-is-html.output.css
-
-[tests.inside-global.input]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/lib/tests/inside-global.input.css
-[tests.inside-global.output]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/lib/tests/inside-global.output.css
-
-[tests.has-child-rules.input]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/lib/tests/has-child-rules.input.css
-[tests.has-child-rules.output]: https://github.com/vnphanquang/postcss-color-scheme/blob/main/lib/tests/has-child-rules.output.css
+[v1]: https://github.com/vnphanquang/postcss-color-scheme/tree/v1.0.1
 
 <!-- npm -->
+
 [npm.badge]: https://img.shields.io/npm/v/postcss-color-scheme
 [npm]: https://www.npmjs.com/package/postcss-color-scheme
 
 <!-- heading badge -->
+
 [license.badge]: https://img.shields.io/badge/license-MIT-blue.svg
 [license]: ./LICENSE
-[github.actions.changeset.badge]: https://github.com/vnphanquang/postcss-color-scheme/actions/workflows/changeset.yaml/badge.svg?branch=main
-[github.actions.changeset]: https://github.com/vnphanquang/postcss-color-scheme/actions/workflows/changeset.yaml
+[github.actions.changesets.badge]: https://github.com/vnphanquang/postcss-color-scheme/actions/workflows/changesets.yaml/badge.svg?branch=main
+[github.actions.changesets]: https://github.com/vnphanquang/postcss-color-scheme/actions/workflows/changesets.yaml
 [codecov.badge]: https://codecov.io/gh/vnphanquang/postcss-color-scheme/branch/main/graph/badge.svg?token=fi6Al6JEGA
 [codecov]: https://codecov.io/github/vnphanquang/postcsss-color-scheme?branch=main
-
 [postcss-nesting]: https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-nesting
 [postcss-nested]: https://github.com/postcss/postcss-nested
 [tailwind]: https://tailwindcss.com/

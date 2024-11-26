@@ -1,0 +1,59 @@
+{
+	"name": "postcss-color-scheme",
+	"version": "1.0.1",
+	"description": "postcss plugin for handling prefers-color-scheme more gracefully",
+	"type": "module",
+	"main": "lib/postcss.js",
+	"types": "types/postcss.d.ts",
+	"exports": {
+		".": {
+			"types": "./types/postcss.d.ts",
+			"import": "./lib/postcss.js",
+			"default": "./lib/postcss.js"
+		},
+		"./tailwind.css": "./lib/tailwind.css"
+	},
+	"publishConfig": {
+		"access": "public",
+		"provenance": true
+	},
+	"files": [
+		"lib",
+		"types"
+	],
+	"license": "MIT",
+	"keywords": [
+		"postcss-plugin",
+		"postcss",
+		"plugin",
+		"theme",
+		"dark",
+		"color",
+		"scheme",
+		"mode"
+	],
+	"author": {
+		"email": "vnphanquang@gmail.com",
+		"name": "Quang Phan",
+		"url": "https://github.com/vnphanquang"
+	},
+	"homepage": "https://github.com/vnphanquang/postcss-color-scheme",
+	"bugs": {
+		"url": "https://github.com/vnphanquang/postcss-color-scheme/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/vnphanquang/postcss-color-scheme.git",
+		"directory": "package"
+	},
+	"scripts": {
+		"prepublishOnly": "pnpm dts",
+		"dts": "dts-buddy --write && publint"
+	},
+	"peerDependencies": {
+		"postcss": "^8.0.0"
+	},
+	"volta": {
+		"extends": "../package.json"
+	}
+}

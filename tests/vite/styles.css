@@ -1,0 +1,11 @@
+:root {
+	--color: gray;
+
+	@color-scheme light {
+		--color: black;
+	}
+
+	@color-scheme dark {
+		--color: white;
+	}
+}

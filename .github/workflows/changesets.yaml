@@ -1,12 +1,11 @@
-name: changesets
+name: Changesets
 on:
   push:
     branches:
       - main
     paths:
-      - ".changeset/**"
-      - ".github/workflows/changeset.yaml"
-      - "package.json"
+      - '.changeset/**'
+      - '.github/workflows/changesets.yaml'
   workflow_dispatch:
 
 env:
@@ -15,19 +14,24 @@ env:
   TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
 jobs:
   Version:
+    if: github.repository == 'vnphanquang/postcss-color-scheme' # prevents this action from running on forks
+    permissions:
+      contents: write # to create release (changesets/action)
+      id-token: write # OpenID Connect token needed for provenance
+      pull-requests: write # to create pull request (changesets/action)
     timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
       - name: Setup node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 22
           cache: pnpm
       - name: Install dependencies
         run: pnpm install --ignore-scripts --no-frozen-lockfile
@@ -36,8 +40,8 @@ jobs:
         with:
           version: pnpm ci:version
           publish: pnpm ci:publish
-          commit: "chore(release): changesets versioning & publication"
-          title: "Changesets: Versioning & Publication"
+          commit: 'chore(release): changesets versioning & publication'
+          title: 'Changesets: Versioning & Publication'
           createGithubReleases: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
