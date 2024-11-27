@@ -220,7 +220,7 @@ free to use both: the former is for markup, while the latter is for CSS.
 [github.actions.changesets.badge]: https://github.com/vnphanquang/postcss-color-scheme/actions/workflows/changesets.yaml/badge.svg?branch=main
 [github.actions.changesets]: https://github.com/vnphanquang/postcss-color-scheme/actions/workflows/changesets.yaml
 [codecov.badge]: https://codecov.io/gh/vnphanquang/postcss-color-scheme/branch/main/graph/badge.svg?token=fi6Al6JEGA
-[codecov]: https://codecov.io/github/vnphanquang/postcsss-color-scheme?branch=main
+[codecov]: https://codecov.io/github/vnphanquang/postcss-color-scheme?branch=main
 [postcss-nesting]: https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-nesting
 [postcss-nested]: https://github.com/postcss/postcss-nested
 [tailwind]: https://tailwindcss.com/
