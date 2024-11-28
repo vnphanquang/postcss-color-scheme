@@ -26,7 +26,7 @@ test('tailwind v4', async ({ expect, utils }) => {
 	const candidates = ['light:text-black', 'dark:text-white'];
 	const output = build(candidates);
 	expect(output).toMatchInlineSnapshot(`
-		"/*! tailwindcss v4.0.0-beta.2 | MIT License | https://tailwindcss.com */
+		"/*! tailwindcss v4.0.0-beta.3 | MIT License | https://tailwindcss.com */
 		@layer base {
 		  :root {
 		    --color-white: #fff;
