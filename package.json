@@ -88,6 +88,11 @@
 		],
 		"packageManager": [
 			{
+				"name": "npm",
+				"version": ">=10.9.0",
+				"onFail": "ignore"
+			},
+			{
 				"name": "pnpm",
 				"version": ">=9.0.0",
 				"onFail": "error"
