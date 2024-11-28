@@ -6,9 +6,14 @@ import { expect, test as vTest } from 'vitest';
 
 import plugin from '../lib/postcss.js';
 
-async function compile(input: string, plugins: postcss.Plugin[] = []): Promise<string> {
+type CompileConfig = {
+	options?: Parameters<typeof plugin>[0];
+	plugins?: postcss.AcceptedPlugin[];
+};
+
+async function compile(input: string, config: CompileConfig = {}): Promise<string> {
 	const { currentTestName } = expect.getState();
-	const processor = postcss([plugin(), ...plugins]);
+	const processor = postcss([plugin(config.options), ...(config.plugins ?? [])]);
 	const result = await processor.process(input, {
 		from: `${path.resolve(import.meta.url)}?test=${currentTestName}`,
 	});
