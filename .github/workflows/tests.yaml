@@ -4,7 +4,7 @@ on:
     branches:
       - main
     paths:
-      - 'package/lib/**'
+      - 'lib/**'
       - 'tests/**'
       - '.github/workflows/tests.yaml'
   pull_request:
@@ -19,7 +19,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-    timeout-minutes: 10
+    timeout-minutes: 5
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -48,6 +48,7 @@ jobs:
         run: 'pnpm ci:test:units'
 
       - name: Upload Test Results
+        if: matrix.os != 'windows-latest' # currently extremely slow upload in Windows
         uses: codecov/test-results-action@v1
         with:
           fail_ci_if_error: true
@@ -57,6 +58,7 @@ jobs:
           verbose: true
 
       - name: Upload to Codecov
+        if: matrix.os != 'windows-latest' # currently extremely slow upload in Windows
         uses: codecov/codecov-action@v5
         with:
           fail_ci_if_error: true

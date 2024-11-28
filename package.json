@@ -1,14 +1,64 @@
 {
-	"name": "workspace-root",
+	"name": "postcss-color-scheme",
+	"version": "2.0.0",
+	"description": "postcss plugin for handling prefers-color-scheme more gracefully",
 	"type": "module",
+	"main": "lib/postcss.js",
+	"types": "types/postcss.d.ts",
+	"exports": {
+		".": {
+			"types": "./types/postcss.d.ts",
+			"import": "./lib/postcss.js",
+			"default": "./lib/postcss.js"
+		},
+		"./tailwind.css": "./lib/tailwind.css"
+	},
+	"publishConfig": {
+		"access": "public",
+		"provenance": true
+	},
+	"files": [
+		"lib",
+		"types"
+	],
+	"license": "MIT",
+	"keywords": [
+		"postcss-plugin",
+		"postcss",
+		"plugin",
+		"theme",
+		"dark",
+		"color",
+		"scheme",
+		"mode"
+	],
+	"author": {
+		"email": "vnphanquang@gmail.com",
+		"name": "Quang Phan",
+		"url": "https://github.com/vnphanquang"
+	},
+	"homepage": "https://github.com/vnphanquang/postcss-color-scheme",
+	"bugs": {
+		"url": "https://github.com/vnphanquang/postcss-color-scheme/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/vnphanquang/postcss-color-scheme.git",
+		"directory": "package"
+	},
 	"scripts": {
+		"prepublishOnly": "pnpm dts",
+		"dts": "dts-buddy --write && publint",
 		"format": "prettier --write .",
-		"lint": "eslint package/lib/**/*",
+		"lint": "eslint lib/**/*",
 		"test": "vitest --coverage",
 		"ci:test:units": "vitest run tests/units --coverage --reporter=junit --outputFile=./coverage/junit.xml",
 		"ci:test:integrations": "vitest run tests/vite tests/tailwind",
 		"ci:version": "changeset version && pnpm install --no-frozen-lockfile",
 		"ci:publish": "changeset publish && pnpm install"
+	},
+	"peerDependencies": {
+		"postcss": "^8.0.0"
 	},
 	"devDependencies": {
 		"@changesets/changelog-github": "^0.5.0",
@@ -27,10 +77,22 @@
 		"typescript": "^5.7.2",
 		"vitest": "^2.1.6"
 	},
-	"packageManager": "pnpm@9.12.0",
-	"engines": {
-		"pnpm": ">=9.0.0",
-		"node": ">=22.0.0"
+	"packageManager": "pnpm@9.12.3",
+	"devEngines": {
+		"runtime": [
+			{
+				"name": "node",
+				"version": ">= 22.0.0",
+				"onFail": "error"
+			}
+		],
+		"packageManager": [
+			{
+				"name": "pnpm",
+				"version": ">=9.0.0",
+				"onFail": "error"
+			}
+		]
 	},
 	"volta": {
 		"node": "22.11.0"

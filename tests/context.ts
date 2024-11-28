@@ -4,7 +4,7 @@ import dedent from 'dedent';
 import postcss from 'postcss';
 import { expect, test as vTest } from 'vitest';
 
-import plugin from '../package/lib/postcss.js';
+import plugin from '../lib/postcss.js';
 
 async function compile(input: string, plugins: postcss.Plugin[] = []): Promise<string> {
 	const { currentTestName } = expect.getState();

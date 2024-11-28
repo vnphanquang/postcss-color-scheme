@@ -1,4 +1,4 @@
-import { invalidParameter, noParameter } from '../../package/lib/errors';
+import { invalidParameter, noParameter } from '../../lib/errors';
 import { test } from '../context';
 
 test('no parameter', async ({ expect, utils: { compile, css } }) => {
